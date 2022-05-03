@@ -9,8 +9,8 @@ Router.use(decodeAuthentication);
 Router.get("/student/events/:id",controlls.getAllRegisterdEve)
 .get("/student/:id",controlls.getStudent)
  .put("/student/:id",[
-    query("email").exists().withMessage("this Field is Mandatory").isEmail().withMessage("your Email Doesn't matches the Criteria"),
-    query("password").exists().withMessage("this Field is Mandatory").isStrongPassword().withMessage("password doesn't matches password Crietria")
+    body("email").exists().withMessage("this Field is Mandatory").isEmail().withMessage("your Email Doesn't matches the Criteria"),
+    body("password").exists().withMessage("this Field is Mandatory").isStrongPassword().withMessage("password doesn't matches password Crietria")
  ],controlls.updateStudent)
 // .put()
 // .delete()

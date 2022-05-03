@@ -57,10 +57,10 @@ console.log(request.params.role)
         console.log("else")
         Speaker.findOne({email:Email}).then((d)=>{
 
-                    if(d==null||!bcrypt.compareSync(pass,d.password)){
+                    // if(d==null||!bcrypt.compareSync(pass,d.password)){
     
-                        throw Error("invalid User Name or Password");
-                    }
+                    //     throw Error("invalid User Name or Password");
+                    // }
                     token=jwt.sign({email:Email,role:"speaker"},process.env.Event_Token,{expiresIn:"1h"});
                     response.status(200).json({token,meassge:"login"});
     

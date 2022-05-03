@@ -54,7 +54,7 @@ exports.getStudent=(request,response,next)=>{
 
 
 
-//Edit Speaker Data....
+//Edit student Data....
 exports.updateStudent=(request,response,next)=>{
     checkAuthentication(request,"student");
 
@@ -76,14 +76,14 @@ let Message="";
                 throw new Error("this Student is not Exists")
             }
 
-            Student.findOne({_id:{$ne:request.params.id},email:request.query.email}).then((s)=>{
+            Student.findOne({_id:{$ne:request.params.id},email:request.body.email}).then((s)=>{
 
                 if(s!=null){
 
                     throw new Error("sorry,Duplicate Email");
                 }
                 
-                Student.updateOne({_id:request.params.id},{$set:{email:request.query.email,password:bcrypt.hashSync(request.query.password,10)}})
+                Student.updateOne({_id:request.params.id},{$set:{email:request.body.email,password:bcrypt.hashSync(request.body.password,10)}})
                 .then((s)=>{
                     
                     
@@ -132,16 +132,16 @@ let Message="";
         throw err;
     }
         else{
-            Student.findOne({email:request.query.email}).then((d)=>{
+            Student.findOne({email:request.body.email}).then((d)=>{
 
                 if(d!=null){
 
                     throw new Error("duplicate Email..");
                 }
-               const hashPass= bcrypt.hashSync(request.query.password,10);
+               const hashPass= bcrypt.hashSync(request.body.password,10);
                 let std=new Student({
-                    email:request.query.email,
-                    password:bcrypt.hashSync(request.query.password,10),
+                    email:request.body.email,
+                    password:bcrypt.hashSync(request.body.password,10),
                   
                 })
             console.log(std);

@@ -49,19 +49,19 @@ let Message="";
                 throw new Error("this speaker is not Exists")
             }
 
-            Speaker.findOne({_id:{$ne:request.params.id},email:request.query.email}).then((s)=>{
+            Speaker.findOne({_id:{$ne:request.params.id},email:request.body.email}).then((s)=>{
 
                 if(s!=null){
 
                     throw new Error("sorry,Duplicate Email");
                 }
                 
-                Speaker.updateOne({_id:request.params.id},{$set:{email:request.query.email,userName:request.query.userName,password:bcrypt.hashSync(request.query.password,10)
-                    ,address:{city:request.query.city,street:request.query.street,building:request.query.building}}})
+                Speaker.updateOne({_id:request.params.id},{$set:{email:request.body.email,userName:request.body.userName,password:bcrypt.hashSync(request.body.password,10)
+                    ,address:{city:request.body.city,street:request.body.street,building:request.body.building}}})
                 .then((s)=>{
                     
                     
-                    response.status(200).json(s);
+                    response.status(200).json({Message:"speaker updated",s});
         
                 })
                 .catch((err)=>{
@@ -126,7 +126,7 @@ let Message="";
         throw err;
     }
         else{
-            Speaker.findOne({email:request.query.email}).then((d)=>{
+            Speaker.findOne({email:request.body.email}).then((d)=>{
 
                 if(d!=null){
 
@@ -134,10 +134,10 @@ let Message="";
                 }
 
                 let speaker=new Speaker({
-                    email:request.query.email,
-                    userName:request.query.userName,
-                    password:bcrypt.hashSync(request.query.password,10),
-                    address:{city:request.query.city,street:request.query.street,building:request.query.building},
+                    email:request.body.email,
+                    userName:request.body.userName,
+                    password:bcrypt.hashSync(request.body.password,10),
+                    address:{city:request.body.city,street:request.body.street,building:request.body.building},
                 })
             console.log(speaker);
                 speaker.save();"email=eventAdmin@gmail.com&password=Iti@1234"

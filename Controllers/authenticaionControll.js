@@ -22,13 +22,13 @@ if(!result.isEmpty()){
 
 
 
-let Email=request.query.email;
-let pass=request.query.password;
+let Email=request.body.email;
+let pass=request.body.password;
 let token;
 
 if(Email=="eventAdmin@gmail.com"&&pass=="Iti@1234"){
 
-    token=jwt.sign({email:Email,role:"admin"},process.env.Event_Token,{expiresIn:"30m"});
+    token=jwt.sign({email:Email,role:"admin"},process.env.Event_Token,{expiresIn:"1h"});
     response.status(200).json({token,meassge:"login"});
 }else{
 
@@ -45,7 +45,7 @@ console.log(request.params.role)
 
             }
         
-            token=jwt.sign({email:Email,role:"student"},process.env.Event_Token,{expiresIn:"1h"});
+            token=jwt.sign({id:d._id,email:Email,role:"student"},process.env.Event_Token,{expiresIn:"1h"});
             response.status(200).json({token,meassge:"login"});
         
             }).catch((err)=>{
@@ -57,11 +57,11 @@ console.log(request.params.role)
         console.log("else")
         Speaker.findOne({email:Email}).then((d)=>{
 
-                    // if(d==null||!bcrypt.compareSync(pass,d.password)){
+                    if(d==null||!bcrypt.compareSync(pass,d.password)){
     
-                    //     throw Error("invalid User Name or Password");
-                    // }
-                    token=jwt.sign({email:Email,role:"speaker"},process.env.Event_Token,{expiresIn:"1h"});
+                        throw Error("invalid User Name or Password");
+                    }
+                    token=jwt.sign({id:d._id,email:Email,role:"speaker"},process.env.Event_Token,{expiresIn:"1h"});
                     response.status(200).json({token,meassge:"login"});
     
                 }).catch((err)=>{

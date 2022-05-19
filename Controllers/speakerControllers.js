@@ -6,6 +6,7 @@ const checkAuthentication=require("../AuthenticationMiddleware/Autherization");
 const express=require("express")
 const bcrypt=require("bcrypt");
 const server=express();
+const jwt=require("jsonwebtoken");//to decode the token
 //getRegistered Events /speaker/events/:id
 exports.getRegisteredEvents=(request,response,next)=>{
     checkAuthentication(request,"speaker");
@@ -31,6 +32,7 @@ exports.getRegisteredEvents=(request,response,next)=>{
 exports.updateSpeaker=(request,response,next)=>{
     //console.log(request.role)
     checkAuthentication(request,"speaker");
+    console.log(request.body);
     let result=validationResult(request);
     if(!result.isEmpty()){
 let Message="";
@@ -40,7 +42,7 @@ let Message="";
         }
         let err=new Error(Message);
         err.status=422;
-        console.log(Message)
+        //console.log(Message)
         throw err;
     }else{
 
@@ -57,7 +59,7 @@ let Message="";
                 }
                 
                 Speaker.updateOne({_id:request.params.id},{$set:{email:request.body.email,userName:request.body.userName,password:bcrypt.hashSync(request.body.password,10)
-                    ,address:{city:request.body.city,street:request.body.street,building:request.body.building}}})
+                    ,address:{city:request.body.address.city,street:request.body.address.street,building:request.body.address.building}}})
                 .then((s)=>{
                     
                     
@@ -90,17 +92,28 @@ let Message="";
 // get Speaker info...
 exports.getSpeaker=(request,response,next)=>{
     checkAuthentication(request,"speaker");
-    let stdId=request.params.id;
-    speaker.findOne({_id:stdId}).then((s)=>{
-        if(s==null){
 
-            throw new Error("student No."+stdId+" Not Found");
+
+  
+    let speakId=request.params.id;
+    token=request.get("Authorization").split(" ")[1];
+    let tokenStdId=jwt.verify(token,process.env.Event_Token);
+
+    if(tokenStdId.id!=speakId){
+       
+
+        throw new Error("somthing might went Wrong");
+    }
+    console.log(speakId)
+    Speaker.findOne({_id:speakId}).then((s)=>{
+       
+        if(s==null){
+            throw new Error("student No."+speakId+" Not Found");
             
         }
         response.status(200).json(s);
     })
     .catch((err)=>{
-
        next(err);       
     })
   

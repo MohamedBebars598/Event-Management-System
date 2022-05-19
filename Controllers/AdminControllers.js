@@ -1,12 +1,58 @@
 const Eevent=require("../Models/EventsSchema")//Event Collection
 const Student=require("../Models/StudentSchema");//Student Collection
 const Speaker=require("../Models/SpeakersSchema");//speaker Collerction
-const {validationResult}=require("express-validator")
+const {validationResult, body}=require("express-validator")
 const checkAuthentication=require("../AuthenticationMiddleware/Autherization");
+const moment=require('moment');
 
-exports.getAllData=(request,response)=>{
+
+
+//get All Students in DB
+exports.getAllStudents=(request,response)=>{
     checkAuthentication(request,"admin");
-    response.status(200).json({meassge:"All Data"});
+
+    Student.find({}).then(d=>{
+        
+        response.status(200).json(d);
+        
+    }).catch(err=>{
+
+        next(err);
+    })
+
+}
+
+
+
+//Get All Speakers in DB
+exports.getAllSpeakers=(request,response)=>{
+    checkAuthentication(request,"admin");
+
+    Speaker.find({}).then(d=>{
+        
+        response.status(200).json(d);
+        
+    }).catch(err=>{
+
+        next(err);
+    })
+
+}
+
+
+
+//get All Event
+exports.getAllEvent=(request,response)=>{
+    checkAuthentication(request,"admin");
+
+    Eevent.find({}).populate("mainSpeaker").populate("otherSpeakers").populate("students").then(d=>{
+        
+        response.status(200).json(d);
+        
+    }).catch(err=>{
+
+        next(err);
+    })
 
 }
 
@@ -97,12 +143,15 @@ exports.createEvent=(request,response)=>{
 
 
         let event=new Eevent({
-            title:request.query.title,
-            date:request.query.date,
-            mainSpeaker:request.query.mainSpeaker,
-            otherSpeakers:request.query.otherSpeakers,
-            students:request.query.students
+            title:request.body.title,
+            date:request.body.date,
+            mainSpeaker:request.body.mainSpeaker,
+            otherSpeakers:request.body.otherSpeakers,
+            students:request.body.students
         })
+
+        console.log(request);
+        console.log(event);
     
         event.save().then((s)=>{
 
@@ -171,10 +220,9 @@ exports.updateEvent=(request,response,next)=>{
             console.log(Message)
             throw err;
         }else{
-    
             Eevent.findOne({_id:request.params.id}).then((eventrExist)=>{            
-                Eevent.updateOne({_id:request.params.id},{$set:{title:request.query.title,date:request.query.date,
-                mainSpeaker:request.query.mainSpeaker,otherSpeakers:request.query.otherSpeakers,students:request.query.students
+                Eevent.updateOne({_id:request.params.id},{$set:{title:request.body.title,date:request.body.date,
+                mainSpeaker:request.body.mainSpeaker,otherSpeakers:request.body.otherSpeakers,students:request.body.students
                 }}).then((s)=>{
 
                     response.status(200).json(s);
@@ -215,14 +263,14 @@ exports.updateSpeaker=(request,response,next)=>{
                     throw new Error("this speaker is not Exists")
                 }
     
-                Speaker.findOne({email:request.query.email}).then((s)=>{
+                Speaker.findOne({email:request.body.email}).then((s)=>{
     
                     if(s!=null){
     
                         throw new Error("sorry,Duplicate Email");
                     }
                     
-                    Speaker.updateOne({_id:request.params.id},{$set:{email:request.query.email,address:{city:request.query.city,street:request.query.street,building:request.query.building}}})
+                    Speaker.updateOne({_id:request.params.id},{$set:{email:request.body.email,address:{city:request.body.address.city,street:request.body.address.street,building:request.body.address.building}}})
                     .then((s)=>{
                         
                         
@@ -278,14 +326,14 @@ let Message="";
                 throw new Error("this Student is not Exists")
             }
 
-            Student.findOne({email:request.query.email}).then((s)=>{
+            Student.findOne({email:request.body.email}).then((s)=>{
 
                 if(s!=null){
 
                     throw new Error("sorry,Duplicate Email");
                 }
                 
-                Student.updateOne({_id:request.params.id},{$set:{email:request.query.email}})
+                Student.updateOne({_id:request.params.id},{$set:{email:request.body.email}})
                 .then((s)=>{
                     
                     
@@ -398,7 +446,7 @@ exports.addStudentToEve=(request,response,next)=>{
                 throw new Error("Event Not Found");
             }
 
-            let newStudents=s.students.concat(request.query.students).map(Number);//concate the old in mongo with the incoming Students
+            let newStudents=s.students.concat(request.body.students).map(Number);//concate the old in mongo with the incoming Students
             let unique=[...new Set(newStudents)]//convert array to Set of unique to remove redundant values and convert it back to array
 
             console.log(unique)
@@ -428,6 +476,8 @@ exports.addStudentToEve=(request,response,next)=>{
 
 
 
+
+
 //add otherSpeakers to specific Event
 exports.addOtherSpeakersToEve=(request,response,next)=>{
 
@@ -450,7 +500,7 @@ exports.addOtherSpeakersToEve=(request,response,next)=>{
 
                 throw new Error("Event Not Found");
             }
-            let newOtherSpeakers=s.otherSpeakers.concat(request.query.otherSpeakers).map(Number);//concate the old in mongo with the incoming Students
+            let newOtherSpeakers=s.otherSpeakers.concat(request.body.otherSpeakers).map(Number);//concate the old in mongo with the incoming Students
             let unique=[...new Set(newOtherSpeakers)]//convert array to Set of unique to remove redundant values and convert it back to array
 
             console.log(unique)
@@ -480,7 +530,7 @@ exports.addOtherSpeakersToEve=(request,response,next)=>{
 
 
 
-//add Student or Students to specific Event
+//add MainSpeaker or MainSpeaker to specific Event
 exports.addMainSpeakerToEve=(request,response,next)=>{
     checkAuthentication(request,"admin");
 
@@ -504,7 +554,8 @@ exports.addMainSpeakerToEve=(request,response,next)=>{
 
                 throw new Error("Event Not Found");
             }
-            let newMainSpeaker=request.query.mainSpeaker;
+            let newMainSpeaker=request.body.mainSpeaker;
+
             console.log(newMainSpeaker)
             Eevent.updateOne({_id:request.params.id},{$set:{mainSpeaker:newMainSpeaker}}).then((s)=>{
 

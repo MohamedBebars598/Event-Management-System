@@ -12,11 +12,12 @@ Router
 .get("/speaker/events/:id",Controllers.getRegisteredEvents)//getRegistered Events
 .get("/speaker/:id",Controllers.getSpeaker)//Get Speaker Data....
  .put("/speaker/:id",[
+     
 body("email").isEmail().withMessage("your Email Doesn't matches the Criteria"),
 body("password").isStrongPassword().withMessage("password doesn't matches password Crietria"),
-body("city").isString(),
-body("street").isString(),
-body("building").isNumeric(),
+body("address.city").isString(),
+body("address.street").isString(),
+body("address.building").isNumeric(),
  ],Controllers.updateSpeaker)//Edit Speaker Profile...
 
 //this Bonus Part...

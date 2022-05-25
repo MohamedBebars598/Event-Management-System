@@ -18,8 +18,11 @@ exports.getRegisteredEvents=(request,response,next)=>{
 
             throw new Error("No Events Registered for Speaker No."+stdId)
             
-        }
-        response.status(200).json(s);
+        }      
+        
+        setTimeout(()=>{
+            response.status(200).json(s);
+        },1500)
     })
     .catch((err)=>{
 
@@ -111,7 +114,9 @@ exports.getSpeaker=(request,response,next)=>{
             throw new Error("student No."+speakId+" Not Found");
             
         }
-        response.status(200).json(s);
+        setTimeout(()=>{
+            response.status(200).json(s);
+        },1500)
     })
     .catch((err)=>{
        next(err);       

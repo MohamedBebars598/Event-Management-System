@@ -7,6 +7,8 @@ const decodeAuthentication=require("../AuthenticationMiddleware/AuthenticationMi
 Router.use(decodeAuthentication);
 
 
+
+
 //get //post //update //Delete
 Router
 .get("/admin/getAllEvents",Controls.getAllEvent)

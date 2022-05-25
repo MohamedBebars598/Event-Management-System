@@ -20,7 +20,9 @@ Event.find({students:{$elemMatch:{$eq:stdId}}})
         throw new Error("No Event has Registered Student No."+stdId)
         
     }
-    response.status(200).json(s);
+    setTimeout(()=>{
+        response.status(200).json(s);
+    },1500)
   
 })
 .catch((err)=>{
@@ -50,7 +52,9 @@ exports.getStudent=(request,response,next)=>{
             throw new Error("student No."+stdId+" Not Found");
             
         }
-        response.status(200).json(s);
+        setTimeout(()=>{
+            response.status(200).json(s);
+        },1500)
     })
     .catch((err)=>{
 

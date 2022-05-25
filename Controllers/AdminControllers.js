@@ -9,11 +9,16 @@ const moment=require('moment');
 
 //get All Students in DB
 exports.getAllStudents=(request,response)=>{
+
+    
     checkAuthentication(request,"admin");
 
     Student.find({}).then(d=>{
+        setTimeout(()=>{
+            response.status(200).json(d);
+        },1500)
+
         
-        response.status(200).json(d);
         
     }).catch(err=>{
 
@@ -29,8 +34,11 @@ exports.getAllSpeakers=(request,response)=>{
     checkAuthentication(request,"admin");
 
     Speaker.find({}).then(d=>{
-        
-        response.status(200).json(d);
+        setTimeout(()=>{
+
+            response.status(200).json(d);
+
+        },1500)
         
     }).catch(err=>{
 
@@ -47,7 +55,11 @@ exports.getAllEvent=(request,response)=>{
 
     Eevent.find({}).populate("mainSpeaker").populate("otherSpeakers").populate("students").then(d=>{
         
-        response.status(200).json(d);
+        setTimeout(()=>{
+
+            response.status(200).json(d);
+
+        },1500)
         
     }).catch(err=>{
 
@@ -68,8 +80,9 @@ exports.getEvent=(request,response,next)=>{
 
             throw new Error("Event No."+stdId+" Not Found");
         }
-        
-        response.status(200).json(s);
+        setTimeout(()=>{
+            response.status(200).json(s);
+        },1500)
     })
     .catch((err)=>{
 
@@ -90,8 +103,11 @@ exports.getSpeaker=(request,response,next)=>{
 
             throw new Error("student No."+stdId+" Not Found");
         }
-        
-        response.status(200).json(s);
+
+        //this  just to make loading.....
+        setTimeout(()=>{
+            response.status(200).json(s);
+        },1500)
     })
     .catch((err)=>{
 
@@ -111,8 +127,12 @@ exports.getSpeaker=(request,response,next)=>{
 
             throw new Error("student No."+stdId+" Not Found");
         }
-        
-        response.status(200).json(s);
+        // this just to make loading
+        setTimeout(()=>{
+
+            response.status(200).json(s);
+
+        },1500)
     })
     .catch((err)=>{
 
@@ -158,6 +178,7 @@ exports.createEvent=(request,response)=>{
             console.log(s);
             
         });
+        
         
         response.status(200).json({meassge:"Create Event"});
     }

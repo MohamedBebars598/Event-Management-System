@@ -1,0 +1,22 @@
+<table class="table  text-center table-hover mt-5 tt">
+    <thead>
+        <tr>
+            <th >ID</th>
+            <th >Email</th>
+            <th >Opearations</th>
+            
+
+        </tr>
+    </thead>
+    <tbody >
+        <tr *ngFor="let std of stds">
+            <td>{{std._id}}</td>
+            <td>{{std.email}}</td>
+            <td><a style="margin-right: 5px;" [routerLink]="['edit',std._id]" class="btn btn-success">Edit</a>
+            
+                <a (click)="removeStd(std._id)" class="btn btn-danger">Remove</a>
+            </td>
+        </tr>
+       
+    </tbody>
+</table>

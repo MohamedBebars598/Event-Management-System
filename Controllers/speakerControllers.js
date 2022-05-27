@@ -155,14 +155,14 @@ let Message="";
                     email:request.body.email,
                     userName:request.body.userName,
                     password:bcrypt.hashSync(request.body.password,10),
-                    address:{city:request.body.city,street:request.body.street,building:request.body.building},
+                    address:{city:request.body.address.city,street:request.body.address.street,building:request.body.address.building},
                 })
             console.log(speaker);
                 speaker.save();"email=eventAdmin@gmail.com&password=Iti@1234"
                 response.status(200).json({Message:"login"})
-
                 
             }).catch((s)=>{
+                console.log('l2l2')
                 next(s);
             })
            

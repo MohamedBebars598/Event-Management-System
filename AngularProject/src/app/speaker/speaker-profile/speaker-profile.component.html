@@ -1,0 +1,21 @@
+<div class=" cotainer-fluid d-flex w-75 m-auto text-center justify-content-center my-5 std-Data">
+    <div class="card  std-Data border-0" style="width: 40rem;">
+        <div class="card-body   ">
+          <p class="h1 card-title">My Profile</p>
+          <p class="h3 head card-subtitle mb-2 text-muted">Personal Data</p>
+          <!-- Data Content... -->
+          <div class="text-start ">
+    
+            <h3><strong>ID:</strong> {{spk._id}}</h3>
+            <h3><strong>Email:</strong> {{spk.email}}</h3>
+            <h3><strong>Passsword:</strong> ***********</h3>
+            <h3><strong>USer Name:</strong> {{spk.userName}}</h3>
+            <h3><strong>City:</strong> {{spk.address.city}}</h3>
+            <h3><strong>Street:</strong> {{spk.address.street}}</h3>
+            <h3><strong>Building:</strong> {{spk.address.building}}</h3>
+          </div>
+          <a [routerLink]="['/speaker/editSpeaker']" class="card-link btn btn-success">Edit My Profile</a>
+        </div>
+      </div>
+    
+    </div>

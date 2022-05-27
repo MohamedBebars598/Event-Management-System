@@ -1,0 +1,81 @@
+<div>
+    <div class="form">
+      <img class="avatar" src="../../../assets/speakerRegs/avarar.png">
+        <h2 id="registration">Update Event</h2>
+        <form (ngSubmit)="onSubmit()" #myForm="ngForm">
+            <!-- email input... -->
+            <label for="email">Event Title</label>
+            <input   type="text" id="text" name="title" placeholder="Enter the Title"  [ngModel]="title"   #em="ngModel"  >
+            <span *ngIf="em.value!=''&&em.invalid&&em.touched" >invalid Email</span><br>
+            <span *ngIf="em.value=='' && em.touched" >you didn't Entere an Event</span><br>
+  
+  
+
+  
+            <label for="email">Event Date</label>
+            <input  DateValidator type="text" id="date" name="date" placeholder="Enter Date (YYYY-MM-DD) " [ngModel]="date"   #dt="ngModel">
+            <span *ngIf="dt.value!=''&&dt.invalid&&dt.touched" >invalid Date</span><br>
+            <span *ngIf="dt.value=='' && dt.touched" >you didn't Entere a Date</span><br>
+
+            <label style="margin-right: 10px;">Select Students</label>
+            <p-multiSelect  placeholder="choose Students"    [options]="stdIds" [(ngModel)]="selectedStudents"  #st="ngModel" name="stdIds"  [maxSelectedLabels]="5" [selectedItemsLabel]="'{0} items select'"></p-multiSelect><br><br>
+            <label style="margin-right: 10px;">Select Other Speaker</label>
+
+            <p-multiSelect placeholder="choose Speaker"    [options]="spkIds" [(ngModel)]="selectedSpeakers"  #sp="ngModel" name="spkIds"  [maxSelectedLabels]="5" [selectedItemsLabel]="'{0} items select'"></p-multiSelect><br><br>
+            <label style="margin-right: 10px;">Select Main Speaker</label>
+            <p-dropdown    placeholder="Choose ID" [options]="MainSoeaker" [(ngModel)]="selectedMainSpeaker"  #mk="ngModel" name="mskId" ></p-dropdown><br><br>
+
+            
+
+
+<!-- <div class="container">
+  
+    <div class="row"><div class="col ">
+    
+      <label>Select Student</label><br>
+      <select style="width: 100%;" name="students" id="field2" multiple multiselect-search="true" multiselect-select-all="true" multiselect-max-items="3" onchange="console.log(this.selectedOptions)" ngModel #sl="ngModel">
+        <option >Abarth</option>
+
+ 
+      </select>
+
+    </div></div>
+    
+
+  </div> -->
+  
+            <input  data-bs-toggle="modal" data-bs-target="#exampleModal1" type="submit" value="Update" id="btn"   ><!--[disabled]="!myForm.valid"-->
+            <span *ngIf="myForm.invalid&&!myForm.dirty&&myForm.submitted " >Please Enter your Data</span><br>
+    
+      
+          </form>
+      </div>
+    
+      
+    
+    
+    <!-- Modal Message -->
+    <div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Confirmation Message</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+           
+            {{Servermessage}}
+          </div>
+          <div class="modal-footer">
+            <!-- this to Confirm Message and Redirect to Login Page -->
+            <button (click)="confirm()" type="button" class="btn btn-secondary" data-bs-dismiss="modal">Confirm</button>
+          
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    </div> 
+
+
+

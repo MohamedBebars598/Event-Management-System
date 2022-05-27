@@ -1,0 +1,242 @@
+
+/* .my-loader{
+margin: 0 !important;
+} */
+
+.my-loader {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    background: black;
+    opacity: 0.8;
+    z-index: 99;
+  }
+.nav-item{
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.dropdown-menu{
+
+    left: -35px
+
+}
+.nav{
+
+    background-color: #01085B !important;
+   
+}
+
+.navbar-toggler-icon{
+    background-image: url('../assets/sss.png');
+}
+
+
+.myCon{
+
+    width: 100% !important;
+    height: 100% !important;
+    overflow: auto;
+ 
+}
+
+/* signUp */
+.signup{
+
+    background-image: url('../assets/bac6.png');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.signup-back{
+z-index: 999999;
+    background-color: #000 !important;
+    opacity: 0.9;
+}
+
+
+.sign-link{
+    color: #fff !important;
+
+    
+}
+
+
+/* student  */
+
+.std-back{
+
+    background-image: url('../assets/bac1.jpg');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.signup-std-link{
+
+    color: #fff !important;
+}
+
+
+.signup-std-nav{
+
+    background-color: #29416D!important;
+    opacity: 0.9;
+}
+
+
+.std-logged{
+
+    background-image: url('../assets/bac4.jpg');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    
+}
+
+
+.std-logged-nav{
+
+    background-color: #000!important;
+    opacity: 0.8;
+}
+
+
+.std-logged-link{
+
+    color: #fff !important;
+}
+
+
+.std-logged-link:hover{
+
+    color: #6c3527 !important;
+}
+
+
+/* Speaker */
+.spk-back{
+    background-image: url('../assets/6Bxo3l.jpeg');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.signup-spk-nav{
+
+    background-color: #062673!important;
+    opacity: 0.9;
+}
+
+
+.signup-spk-link{
+
+    color: #fff !important;
+}
+
+
+.spk-logged{
+
+    background-image: url('../assets/speakerRegs/bac1.jpg');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    
+}
+
+
+.spk-logged-nav{
+
+    background-color: #000!important;
+    opacity: 0.8;
+}
+
+
+.spk-logged-link{
+
+    color: #fff !important;
+}
+
+
+.spk-logged-link:hover{
+
+    color: #461008 !important;
+}
+
+
+
+
+/* Admin.... */
+
+
+
+
+
+.adm-back{
+    background-image: url('../../src/assets/admin/bac2.jpg');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+
+
+
+
+
+.adm-logged{
+
+    background-image: url('../../src/assets/admin/bac2.jpg');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    
+}
+
+
+.adm-logged-nav{
+
+    background-color: #000F31!important;
+    opacity: 0.8;
+}
+
+
+.adm-logged-link{
+
+    color: #fff !important;
+}
+
+
+.adm-logged-link:hover{
+
+    color: #B45475 !important;
+}
+
+
+
+
+
+
+/* Login */
+.login-back{
+    background-image: url('../assets/bac5.jpg');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.login-nav{
+
+    background-color: #100E0F!important;
+    opacity: 0.9;
+}
+
+
+.login-link{
+
+    color: #fff !important;
+}
+
+
+

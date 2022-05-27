@@ -1,0 +1,24 @@
+
+
+<div class="cotainer-fluid d-flex w-75 m-auto text-center justify-content-center my-5 std-Data">
+<div class="card my-5 std-Data border-0" style="width: 40rem;">
+    <div class="card-body my-5  ">
+      <h2 class="card-title">My Profile</h2>
+      <h3 class="card-subtitle mb-2 text-muted">Personal Data</h3>
+      <!-- Data Content... -->
+      <div class="text-start">
+
+        <h3><strong>ID:</strong> {{std._id}}</h3>
+        <h3><strong>Email:</strong> {{std.email}}</h3>
+        <h3><strong>Passsword:</strong> ***********</h3>
+      
+
+
+      </div>
+      <a [routerLink]="['/student/editStudent']" class="card-link btn btn-success">Edit My Profile</a>
+    </div>
+  </div>
+
+</div>
+
+

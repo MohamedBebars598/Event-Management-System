@@ -1,0 +1,20 @@
+.tt{
+    opacity: 0.9;
+    background-color: #041E36 !important;
+}
+
+
+
+.tt th,td{
+
+    background-color: #041E36 !important;
+    color: #fff;
+}
+
+.table{
+    margin-bottom: 0;
+}
+
+td:hover{
+    color: #7C4366 !important;
+}

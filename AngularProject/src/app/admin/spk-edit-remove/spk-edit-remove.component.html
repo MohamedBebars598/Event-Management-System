@@ -1,0 +1,31 @@
+<table class="  table  text-center  mt-5 tt">
+    <thead>
+        <tr>
+            <th >ID</th>
+            <th >Email</th>
+            <th >USer Name</th>
+            <th >City</th>
+            <th >Street</th>
+            <th >Bulding No.></th>
+            <th >Opearations</th>
+            
+
+        </tr>
+    </thead>
+    <tbody >
+        <tr  *ngFor="let spk of spks">
+            <td>{{spk._id}}</td>
+            <td>{{spk.email}}</td>
+            <td>{{spk.userName}}</td>
+            <td>{{spk.address.city}}</td>
+            <td>{{spk.address.street}}</td>
+            <td>{{spk.address.building}}</td>
+            <td>{{spk.email}}</td>
+            <td><a style="margin-right: 5px;" [routerLink]="['edit',spk._id]" class="btn btn-success">Edit</a>
+            
+                <a (click)="removespk(spk._id)" class="btn btn-danger">Remove</a>
+            </td>
+        </tr>
+       
+    </tbody>
+</table>

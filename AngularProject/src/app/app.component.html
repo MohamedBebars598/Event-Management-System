@@ -1,0 +1,53 @@
+
+  <dir  *ngIf="loaderService.isLoading | async" class="my-loader">
+    <mat-spinner  style="top: 50%; left: 50%;"></mat-spinner>
+    
+  </dir>
+<div class="myCon" [ngClass]="{'signup': whichBac()=='/signUp','std-back':whichBac()=='/studentSignUp','spk-back':whichBac()=='/speakerSignUp','login-back':whichBac()=='/login','std-logged':whichBac()=='/student','spk-logged':whichBac()=='/speaker','adm-logged':whichBac()=='/admin'}">
+
+<nav [ngClass]="{'signup-std-nav': whichBac()=='/studentSignUp','signup-spk-nav': whichBac()=='/speakerSignUp','login-nav':whichBac()=='/login','std-logged-nav':whichBac()=='/student','spk-logged-nav':whichBac()=='/speaker','adm-logged-nav':whichBac()=='/admin'}" class="signup-back  navbar navbar-expand-lg navbar-light nav ">
+  <div class="container-fluid  ">
+    <a *ngIf="who()==null" [ngClass]="{'signup-std-link': whichBac()=='/studentSignUp','signup-spk-link':whichBac()=='/speakerSignUp','login-link':whichBac()=='/login','std-logged-link':whichBac()=='/student','spk-logged-link':whichBac()=='/speaker','sign-link':who()==null}" class="navbar-brand  " href="#">Event System</a>
+    <a *ngIf="who()=='admin'" [routerLink]="['/admin']" [ngClass]="{'signup-std-link': whichBac()=='/studentSignUp','signup-spk-link':whichBac()=='/speakerSignUp','login-link':whichBac()=='/login','std-logged-link':whichBac()=='/student','spk-logged-link':whichBac()=='/speaker','adm-logged-link':whichBac()=='/admin'}" class="navbar-brand  " href="#">Event System</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse m-auto navbar-collapse  justify-content-end mx-5 " id="navbarNavDropdown">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a *ngIf="who()==null" [ngClass]="{'signup-std-link': whichBac()=='/studentSignUp','signup-spk-link':whichBac()=='/speakerSignUp','login-link':whichBac()=='/login','std-logged-link':whichBac()=='/student','sign-link':who()==null}" [routerLink]="['']" class="nav-link  text-body" aria-current="page">Home</a>
+          <a *ngIf="who()=='student'" [ngClass]="{'std-logged-link':whichBac()=='/student'}" [routerLink]="['/student']" class="nav-link  text-body" aria-current="page">Student Profile</a>
+          <a *ngIf="who()=='speaker'" [ngClass]="{'spk-logged-link':whichBac()=='/speaker'}" [routerLink]="['/speaker']" class="nav-link  text-body" aria-current="page">Speaker Profile</a>
+          <a *ngIf="who()=='admin'" [ngClass]="{'adm-logged-link':whichBac()=='/admin'}" [routerLink]="['/admin/event/addSpeaker']" class="nav-link  text-body" aria-current="page">Add Speaker To Event</a>
+         
+          
+        </li>
+
+        <li class="nav-item">
+          <a  *ngIf="who()=='student'" [ngClass]="{'std-logged-link':whichBac()=='/student'}" [routerLink]="['/student/RegisteredEvent']" class="nav-link  text-body" aria-current="page">Get Registered Event</a>
+          <a *ngIf="who()=='speaker'" [ngClass]="{'std-logged-link':whichBac()=='/speaker'}" [routerLink]="['/speaker/RegisteredEvent']" class="nav-link  text-body" aria-current="page">Get Registered Event</a>
+          <a *ngIf="who()=='admin'" [ngClass]="{'adm-logged-link':whichBac()=='/admin'}" [routerLink]="['/admin/event/addStudents']" class="nav-link  text-body" aria-current="page">Add Students To Event</a>
+        </li>
+
+
+        <li *ngIf="whichBac()=='/admin'" class="nav-item">
+          <a *ngIf="who()=='admin'" [ngClass]="{'adm-logged-link':whichBac()=='/admin'}" [routerLink]="['/admin/create']" class="nav-link  text-body" aria-current="page">Create Event</a>
+        </li>
+
+        <li class="nav-item dropdown">
+          <a [ngClass]="{'signup-std-link': whichBac()=='/studentSignUp','signup-spk-link':whichBac()=='/speakerSignUp','login-link':whichBac()=='/login','std-logged-link':whichBac()=='/student','spk-logged-link':whichBac()=='/speaker','adm-logged-link':whichBac()=='/admin','sign-link':who()==null}" class="nav-link dropdown-toggle text-dark" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            More
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+            <li *ngIf="!userLogged()"><a  [routerLink]="['signUp']"  class="dropdown-item" >Sign Up</a></li>
+            <li *ngIf="!userLogged()"><a  [routerLink]="['login']"  class="dropdown-item" >Login</a></li>
+            <li style="cursor: pointer;" *ngIf="userLogged()==true"><a (click)="logOut()" class="dropdown-item" >LogOut</a></li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<router-outlet></router-outlet>
+</div>

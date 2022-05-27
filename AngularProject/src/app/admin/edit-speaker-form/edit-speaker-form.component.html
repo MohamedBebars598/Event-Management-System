@@ -1,0 +1,69 @@
+
+<div>
+    <div class="form">
+      <img class="avatar" src="../../../assets/speakerRegs/avarar.png">
+        <h2 id="registration">Update Spkear Data</h2>
+        <form (ngSubmit)="onSubmit()" #myForm="ngForm">
+            <!-- email input... -->
+            <label for="email">Email</label>
+            <input EmailValidator type="email" id="email" name="email" placeholder="Your last email.." ngModel   #em="ngModel">
+            <span *ngIf="em.value!=''&&em.invalid&&em.touched" >invalid Email</span><br>
+            <span *ngIf="em.value!=''&&em.invalid&&em.touched" ><strong> Ex:</strong>  exampleEmail@gmail.com</span>
+            <span *ngIf="em.value=='' && em.touched" >you didn't Entere an Email</span><br>
+  
+  
+
+  
+    <!-- City -->
+    <label for="City">City</label>
+    <input CityValidator type="text" id="city" name="city" placeholder="Your City." ngModel #cy="ngModel" >
+    <span *ngIf="cy.value!=''&&cy.invalid&&cy.touched" >invalid City</span><br>
+    <span *ngIf="cy.value=='' && cy.touched" >you didn't Entere a City</span><br>
+  
+  
+    <!-- street -->
+    <label for="Street">Street</label>
+    <input StreetValidator type="text" id="street" name="street" placeholder="Your Street." ngModel #st="ngModel" >
+    <span *ngIf="st.value!=''&&st.invalid&&st.touched" >invalid Street</span><br>
+    <span *ngIf="st.value=='' && st.touched" >you didn't Entere a Street</span><br>
+  
+  
+  
+        <!-- bulding -->
+        <label for="Building">Building No.</label>
+        <input BuldingNumberValidator type="text" id="building" name="building" placeholder="Your Building No." ngModel #bn="ngModel" >
+        <span *ngIf="bn.value!=''&&bn.invalid&&bn.touched" >invalid Building No. </span><br>
+        <span *ngIf="bn.value=='' && bn.touched" >you didn't Entere a Building No. </span><br>
+  
+            <input  data-bs-toggle="modal" data-bs-target="#exampleModal1" type="submit" value="Update" id="btn"   ><!--[disabled]="!myForm.valid"-->
+            <span *ngIf="myForm.invalid&&!myForm.dirty&&myForm.submitted " >Please Enter your Data</span><br>
+    
+      
+          </form>
+      </div>
+    
+      
+    
+    
+    <!-- Modal Message -->
+    <div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Confirmation Message</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+           
+            {{Servermessage}}
+          </div>
+          <div class="modal-footer">
+            <!-- this to Confirm Message and Redirect to Login Page -->
+            <button (click)="confirm()" type="button" class="btn btn-secondary" data-bs-dismiss="modal">Confirm</button>
+          
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    </div> 

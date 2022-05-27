@@ -1,0 +1,48 @@
+<div>
+    <div class="form">
+      <img class="avatar" src="../../../assets/studentRegs/student-graduated-avatar-isolated-vector-11224949.jpg">
+        <h2 id="registration">Add Speaker</h2>
+        <form (ngSubmit)="onSubmit()" #myForm="ngForm">
+        
+            <label style="margin-right: 10px;">Select Event</label>
+            <p-dropdown    placeholder="Choose ID" [options]="AllEvents" [(ngModel)]="selectedEvent"  #ev="ngModel" name="event" ></p-dropdown><br><br>
+
+        
+            <label style="margin-right: 10px;">Select Students</label>
+            <p-multiSelect    placeholder="Choose ID" [options]="students" [(ngModel)]="selectedStudent"  #mk="ngModel" name="mskId" ></p-multiSelect><br><br>
+ 
+
+
+            <input  data-bs-toggle="modal" data-bs-target="#exampleModal1" type="submit" value="Update" id="btn"   >
+            <span *ngIf="myForm.invalid&&!myForm.dirty&&myForm.submitted " >Please Enter your Data</span><br>
+    
+      
+          </form>
+      </div>
+    
+      
+    
+    
+    <!-- Modal Message -->
+    <div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Confirmation Message</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+           
+            {{Servermessage}}
+          </div>
+          <div class="modal-footer">
+            <!-- this to Confirm Message and Redirect to Login Page -->
+            <button (click)="confirm()" type="button" class="btn btn-secondary" data-bs-dismiss="modal">Confirm</button>
+          
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    </div> 
+

@@ -1,0 +1,38 @@
+<div>
+    <div class="form">
+        <div  class="avatar-container"> <img class="avatar" src="../../../assets/Login/loginAvatar.png"></div>
+        <h2 id="registration">Login To Your Account</h2>
+        <form (ngSubmit)="onSubmit()" #myForm="ngForm">
+            <!-- email input... -->
+            <label for="email">Email</label>
+            <input EmailValidator  type="email" id="email" name="email" placeholder="Your last email.." ngModel
+                #em="ngModel">
+            <span *ngIf="em.value=='' && myForm.submitted">you didn't Entere an Email</span><br>
+
+
+
+
+            <!-- password... -->
+            <label for="password">Password</label>
+            <input PasswordValidator type="password" id="password" name="password" placeholder="Your Password." ngModel
+                #pas="ngModel">
+            <span *ngIf="pas.value=='' && myForm.submitted">you didn't Entere a Password</span><br>
+
+            <!-- to make the default value work with angular you have to make two way data binding by using ngModel and set the default value and put also in the default option -->
+            <select (change)="onChange($event.target)" name="loginType" class="form-select"
+                aria-label="Default select example" required [(ngModel)]="def" #sl="ngModel">
+                <option value="-1" disabled selected>Open this select menu</option>
+                <option value="student">Student</option>
+                <option value="speaker">Speaker</option>
+                <option value="admin">Admin</option>
+            </select>
+            <span *ngIf="sl.value=='-1' && myForm.submitted">you didn't select a Login Type</span><br>
+
+            <!-- submit button -->
+            <input type="submit" value="Login" id="btn">  <!--[disabled]="!myForm.valid"-->
+            <span *ngIf="myForm.invalid&&myForm.submitted ">Please Enter your Data</span><br>
+            <span *ngIf="myForm.invalid||myForm.value.loginType=='-1' ">{{Servermessage}}</span><br>
+
+
+        </form>
+    </div>

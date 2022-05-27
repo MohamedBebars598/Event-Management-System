@@ -12,9 +12,9 @@ Router
 .post("/speaker/signup",[
     body("email"),
     body("password").isStrongPassword().withMessage("password doesn't matches password Crietria"),
-    body("city").isString(),
-    body("street").isString(),
-    body("building").isNumeric(),
+    body("address.city").isString(),
+    body("address.street").isString(),
+    body("address.building").isNumeric(),
     ],speakerControllers.speakerSignUp)
 
 
